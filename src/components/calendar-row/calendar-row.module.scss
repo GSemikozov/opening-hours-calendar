@@ -1,0 +1,61 @@
+.calendarRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    gap: 12px;
+    border-bottom: 1px solid var(--grey-2);
+}
+
+.calendarCol {
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+    & + & {
+        //color: var(--grey-3);
+    }
+}
+
+.colBadge {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--green);
+    display: inline-flex;
+    margin-left: 12px;
+}
+
+.timeDivider {
+    display: inline-flex;
+    padding: 0 4px;
+}
+
+.calendarRowSkeleton {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: backgroundMovement;
+    animation-timing-function: linear;
+    background: var(--grey-2);
+    background: linear-gradient(267.58deg, var(--grey-2) 0%, var(--grey-1) 80%, var(--grey-2) 100%);
+    background-size: 200%;
+    display: inline-block;
+    width: 80px;
+    height: 20px;
+    border-radius: 2px;
+}
+
+@keyframes backgroundMovement {
+    0% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: -100%;
+    }
+}

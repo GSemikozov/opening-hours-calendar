@@ -1,0 +1,12 @@
+.calendar {
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 2px 4px var(--grey-2);
+    min-width: 440px;
+    background-color: var(--white);
+    box-sizing: border-box;
+
+    @media all and (max-width: 767px) {
+        min-width: 375px;
+    }
+}
