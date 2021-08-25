@@ -8,7 +8,24 @@ export enum DaysEnum {
     sunday = "Sunday",
 }
 
-export type CalendarRowType = {
-    dayType: DaysEnum;
-    dayName: string;
+export enum TimeAvailabilityEnum {
+    close = "close",
+    open = "open",
+}
+
+export type DayData = {
+    type: TimeAvailabilityEnum;
+    value: number;
+};
+
+export type CalendarRowType = (string | DayData)[];
+
+export type CalendarDataResponse = {
+    monday: DayData[];
+    tuesday: DayData[];
+    wednesday: DayData[];
+    thursday: DayData[];
+    friday: DayData[];
+    saturday: DayData[];
+    sunday: DayData[];
 };

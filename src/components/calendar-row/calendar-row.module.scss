@@ -34,28 +34,3 @@
     display: inline-flex;
     padding: 0 4px;
 }
-
-.calendarRowSkeleton {
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: backgroundMovement;
-    animation-timing-function: linear;
-    background: var(--grey-2);
-    background: linear-gradient(267.58deg, var(--grey-2) 0%, var(--grey-1) 80%, var(--grey-2) 100%);
-    background-size: 200%;
-    display: inline-block;
-    width: 80px;
-    height: 20px;
-    border-radius: 2px;
-}
-
-@keyframes backgroundMovement {
-    0% {
-        background-position: 100%;
-    }
-
-    100% {
-        background-position: -100%;
-    }
-}
