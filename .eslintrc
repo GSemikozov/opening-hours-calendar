@@ -71,6 +71,7 @@
         "no-nested-ternary": "error",
         "arrow-body-style": ["error", "as-needed"],
         "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-explicit-any": "off",
         "react/jsx-boolean-value": [2, "always"]
     },
     "settings": {
