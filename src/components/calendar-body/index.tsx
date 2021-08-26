@@ -73,16 +73,18 @@ export const CalendarBody = () => {
 
     const fetchData = useCallback(() => {
         toggleLoading();
-        getData()
-            .then((resp) => {
-                setLoadedData(resp.data);
-                toggleLoading();
-            })
-            .catch((error) => {
-                new Error(error);
-                setFetchDataErrorMessage(error.message);
-                toggleLoading();
-            });
+        setTimeout(() => {
+            getData()
+                .then((resp) => {
+                    setLoadedData(resp.data);
+                    toggleLoading();
+                })
+                .catch((error) => {
+                    new Error(error);
+                    setFetchDataErrorMessage(error.message);
+                    toggleLoading();
+                });
+        }, 6000);
     }, []);
 
     useEffect(() => {
