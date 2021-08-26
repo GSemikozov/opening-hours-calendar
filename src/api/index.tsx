@@ -3,4 +3,8 @@ import axios, { AxiosResponse } from "axios";
 import { config } from "../constants";
 
 export const getData = async (): Promise<AxiosResponse> =>
-    await axios.get(`${config.url.API_URL}/days`);
+    await axios.get(`${config.url.API_URL}/days`, {
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        },
+    });
