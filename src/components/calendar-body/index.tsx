@@ -6,10 +6,13 @@ import { CalendarDataResponse, CalendarRowType, DayData, TimeAvailabilityEnum } 
 import { CalendarRowSkeleton } from "../calendar-row-skeleton";
 import { getData } from "../../api";
 
+import styles from "./calendar-body.module.scss";
+
 export const CalendarBody = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setLoadedData] = useState<CalendarDataResponse>();
     const [modifiedData, setModifiedData] = useState<CalendarRowType[]>([]);
+    const [fetchDataErrorMessage, setFetchDataErrorMessage] = useState<string>();
 
     const toggleLoading = () => {
         setIsLoading((prev) => !prev);
@@ -77,6 +80,7 @@ export const CalendarBody = () => {
             })
             .catch((error) => {
                 new Error(error);
+                setFetchDataErrorMessage(error.message);
                 toggleLoading();
             });
     }, []);
@@ -103,6 +107,9 @@ export const CalendarBody = () => {
                         modifiedData &&
                         modifiedData.map((item, idx) => <CalendarRow key={idx} dayData={item} />)}
                 </>
+            )}
+            {fetchDataErrorMessage && (
+                <div className={styles.errorMessage}>{fetchDataErrorMessage}</div>
             )}
         </>
     );
