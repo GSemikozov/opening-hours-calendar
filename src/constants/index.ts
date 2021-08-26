@@ -1,12 +1,12 @@
 const prod = {
     url: {
-        API_URL: "https://opening-hours-calendar.netlify.app",
+        API_URL: "https://opening-hours-calendar.netlify.app/db.json",
     },
 };
 
 const dev = {
     url: {
-        API_URL: "https://opening-hours-calendar.netlify.app",
+        API_URL: "http://localhost:3001",
     },
 };
 
