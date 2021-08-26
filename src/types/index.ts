@@ -18,7 +18,7 @@ export type DayData = {
     value: number;
 };
 
-export type CalendarRowType = (string | DayData)[];
+export type CalendarRowType = [DaysEnum, DayData[]];
 
 export type CalendarDataResponse = {
     monday: DayData[];

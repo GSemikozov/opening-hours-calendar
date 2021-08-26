@@ -28,3 +28,5 @@ export const formatDate = (hours: number) => {
     const newDate = now.add(hours, "hour");
     return dayjs(newDate).format("h a");
 };
+
+export const capitalizeFirstLetter = (str: string) => str.replace(/^./, str[0].toUpperCase());

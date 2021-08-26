@@ -1,19 +1,30 @@
-import React, { useEffect } from "react";
+import React from "react";
 import dayjs from "dayjs";
 
-// import { CalendarRowType } from "../../types"; TODO: fix type
-import { formatDate, getCurrentDayName } from "../../helpers";
+import { CalendarRowType } from "../../types";
+import { capitalizeFirstLetter, formatDate, getCurrentDayName } from "../../helpers";
 
 import styles from "./calendar-row.module.scss";
 
-// @ts-ignore
-export const CalendarRow = ({ dayData }: any) => {
-    useEffect(() => {
-        console.log("--", dayData);
-    }, [dayData]);
-
-    const dayName = dayData[0];
+export const CalendarRow = ({ dayData }: { dayData: CalendarRowType }) => {
+    const dayName = capitalizeFirstLetter(dayData[0]);
     const dayHours = dayData[1];
+
+    const HoursOutput = ({
+        value,
+        idx,
+        isLast,
+    }: {
+        value: number;
+        idx: number;
+        isLast: boolean;
+    }) => (
+        <div>
+            {formatDate(value / 60 / 60).toUpperCase()}
+            {idx % 2 === 0 && !isLast && <span className={styles.timeDivider}>-</span>}
+            {idx > 0 && idx % 2 !== 0 && !isLast && <span>,&ensp;</span>}
+        </div>
+    );
 
     return (
         <div className={styles.calendarRow}>
@@ -26,13 +37,15 @@ export const CalendarRow = ({ dayData }: any) => {
             <div className={styles.calendarCol}>
                 {dayHours && dayHours.length > 0 ? (
                     dayHours.map((item: { value: number }, key: number) => (
-                        <div key={key}>
-                            {key > 0 && <span className={styles.timeDivider}>-</span>}
-                            {formatDate(item.value / 60 / 60)}
-                        </div>
+                        <HoursOutput
+                            key={key}
+                            idx={key}
+                            value={item.value}
+                            isLast={dayHours.length - 1 === key}
+                        />
                     ))
                 ) : (
-                    <div>Closed</div>
+                    <div className={styles.noData}>Closed</div>
                 )}
             </div>
         </div>

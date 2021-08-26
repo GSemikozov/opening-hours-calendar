@@ -66,12 +66,11 @@
         ],
         "functional/no-mixed-type": 0,
         "@typescript-eslint/camelcase": 0,
-//        "no-console": "error",
+        "no-console": "error",
         "prefer-arrow-callback": "error",
         "no-nested-ternary": "error",
         "arrow-body-style": ["error", "as-needed"],
         "@typescript-eslint/no-non-null-assertion": 0,
-//        "@typescript-eslint/no-explicit-any": "error",
         "react/jsx-boolean-value": [2, "always"]
     },
     "settings": {

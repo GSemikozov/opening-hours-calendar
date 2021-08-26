@@ -47,7 +47,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## TODO's
 
- - All points marked as `TODO`
- - Remove all `@ts-ignore`'s
- - Improve types
- - Use ramda and immer for immutability
+ - Improve types (make it much readable, generic, specific)
+ - Use ramda and immer for immutability when modifying data
+ - Improve error handling

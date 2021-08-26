@@ -1,28 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 
 import { CalendarRow } from "../calendar-row";
-import { CalendarDataResponse, DayData } from "../../types";
-
-import { config } from "../../constants";
+import { CalendarDataResponse, CalendarRowType, DayData, TimeAvailabilityEnum } from "../../types";
 
 import { CalendarRowSkeleton } from "../calendar-row-skeleton";
-import { TimeAvailabilityEnum } from "../../types";
-
-const initDataState = {
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: [],
-    sunday: [],
-};
+import { getData } from "../../api";
 
 export const CalendarBody = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [data, setLoadedData] = useState(initDataState);
-    const [modifiedData, setModifiedData] = useState();
+    const [data, setLoadedData] = useState<CalendarDataResponse>();
+    const [modifiedData, setModifiedData] = useState<CalendarRowType[]>([]);
 
     const toggleLoading = () => {
         setIsLoading((prev) => !prev);
@@ -36,7 +23,8 @@ export const CalendarBody = () => {
 
     const isClosed = useCallback((data: DayData[]) => data.length === 0, []);
 
-    const getAdjustedDay = useCallback(
+    /* checking and modifying */
+    const getAdjustedDays = useCallback(
         ({ current, next }: { current: DayData[]; next: DayData[] }) => {
             if (isClosed(current)) {
                 return { current: current, next: next };
@@ -52,56 +40,45 @@ export const CalendarBody = () => {
         [hasCloseData, isClosed],
     );
 
+    /* for more convenient use and display */
     const modifyData = useCallback(() => {
-        // const isExistInData = (data: (string | DayData[])[][], key: string) => {
-        //     return data.find((item) => item[0] === key);
-        // };
-
-        const modifiedData = (data: CalendarDataResponse) => {
+        const modifiedData = (data: CalendarDataResponse): CalendarRowType[] => {
             const dataArray = Object.entries(data);
-            const reduce = dataArray.reduce(
-                // @ts-ignore
-                (acc, currentDay, currentIndex) => {
-                    const prevEl = acc[currentIndex === 0 ? acc.length - 1 : currentIndex - 1];
-                    const adjustedDays = getAdjustedDay({
-                        current: prevEl[1],
-                        next: currentDay[1],
+            return dataArray.reduce(
+                (acc: Array<any>, nextDay, currentIndex) => {
+                    const currentDay = acc[currentIndex === 0 ? acc.length - 1 : currentIndex - 1];
+                    const adjustedDays = getAdjustedDays({
+                        current: currentDay[1],
+                        next: nextDay[1],
                     });
                     const accumulator = acc.filter(
-                        (item) => item[0] !== prevEl[0] && item[0] !== currentDay[0],
+                        (item) => item[0] !== currentDay[0] && item[0] !== nextDay[0],
                     );
                     return [
                         ...accumulator,
                         ...[
-                            [prevEl[0], adjustedDays.current],
-                            [currentDay[0], adjustedDays.next],
+                            [currentDay[0], adjustedDays.current],
+                            [nextDay[0], adjustedDays.next],
                         ],
                     ];
                 },
                 [dataArray[0]],
             );
-
-            return reduce;
-            // return Object.fromEntries(reduce);
         };
-        // @ts-ignore
         data && setModifiedData(modifiedData(data));
-    }, [data, getAdjustedDay]);
+    }, [data, getAdjustedDays]);
 
     const fetchData = useCallback(() => {
         toggleLoading();
-        setTimeout(() => {
-            axios
-                .get(`${config.url.API_URL}/days`)
-                .then((resp) => {
-                    setLoadedData(resp.data);
-                    toggleLoading();
-                })
-                .catch((error) => {
-                    console.log(error);
-                    toggleLoading();
-                });
-        }, 1000);
+        getData()
+            .then((resp) => {
+                setLoadedData(resp.data);
+                toggleLoading();
+            })
+            .catch((error) => {
+                new Error(error);
+                toggleLoading();
+            });
     }, []);
 
     useEffect(() => {
@@ -124,8 +101,7 @@ export const CalendarBody = () => {
                 <>
                     {!isLoading &&
                         modifiedData &&
-                        // @ts-ignore
-                        modifiedData.map((item) => <CalendarRow key={item[0]} dayData={item} />)}
+                        modifiedData.map((item, idx) => <CalendarRow key={idx} dayData={item} />)}
                 </>
             )}
         </>
