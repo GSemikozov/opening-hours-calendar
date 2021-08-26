@@ -1,6 +1,6 @@
 const prod = {
     url: {
-        API_URL: "https://opening-hours-calendar.netlify.app/db.json",
+        API_URL: "https://opening-hours-calendar-api.netlify.app/api/db.json",
     },
 };
 
