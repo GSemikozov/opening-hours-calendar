@@ -1,5 +1,5 @@
 .header {
-    padding: 8px 0 24px;
+    padding: 0 0 12px;
     border-bottom: 1px solid var(--black);
 }
 
@@ -7,9 +7,13 @@
     display: flex;
     align-items: center;
     margin: 0;
+    font-size: 24px;
+    line-height: 30px;
+    font-family: "Roboto-Bold", sans-serif;
 }
 
 .headerTitleIcon {
-    margin-right: 12px;
+    margin-right: 8px;
     color: var(--grey-3);
+    width: 20px;
 }
