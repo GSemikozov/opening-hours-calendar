@@ -6,7 +6,7 @@ const prod = {
 
 const dev = {
     url: {
-        API_URL: "http://localhost:3001",
+        API_URL: "https://opening-hours-calendar.netlify.app",
     },
 };
 
