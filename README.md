@@ -28,8 +28,10 @@ enabled `format on save`, so you can enjoy local development process with auto-f
 Allows us to keep code clean and follow common standards of code writing in modern react + typescript
 
 ## api
-API was built via `json-server`; API endpoint called `days` and
-posted publicly [here](https://opening-hours-calendar.netlify.app/db.json) or locally here: `/days`
+Locally API is available with `json-server` via endpoint called `days` and
+posted here: `/days`.
+
+Publicly - it's just db.json [data](https://opening-hours-calendar-api.netlify.app/api/db.json) placed in separate repo.
 
 Full data response:
 
