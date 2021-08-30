@@ -29,9 +29,9 @@ Allows us to keep code clean and follow common standards of code writing in mode
 
 ## api
 Locally API is available with `json-server` via endpoint called `days` and
-posted here: `/days`.
+posted here: `localhost:3001/days`.
 
-Publicly - it's just db.json [data](https://opening-hours-calendar-api.netlify.app/api/db.json) placed in separate repo.
+Publicly - it's just `db.json` [data](https://opening-hours-calendar-api.netlify.app/api/db.json) placed in separate repo.
 
 Full data response:
 
