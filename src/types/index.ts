@@ -21,11 +21,5 @@ export type DayData = {
 export type CalendarRowType = [DaysEnum, DayData[]];
 
 export type CalendarDataResponse = {
-    monday: DayData[];
-    tuesday: DayData[];
-    wednesday: DayData[];
-    thursday: DayData[];
-    friday: DayData[];
-    saturday: DayData[];
-    sunday: DayData[];
+    [key: string]: DayData[];
 };
